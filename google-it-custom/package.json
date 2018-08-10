@@ -1,0 +1,22 @@
+{
+  "name": "google-it-custom",
+  "version": "1.0.0",
+  "description": "Querying Google with custom functions",
+  "main": "main.js",
+  "scripts": {
+    "test": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/julienreszka/experimentaljs/google-it-custom/"
+  },
+  "keywords": [
+    "google",
+    "custom"
+  ],
+  "author": "Julien Reszka",
+  "license": "MIT",
+  "dependencies": {
+    "google-it": "^1.1.3"
+  }
+}
