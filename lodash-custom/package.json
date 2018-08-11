@@ -1,0 +1,14 @@
+{
+  "name": "lodash-custom",
+  "version": "1.0.0",
+  "description": "testing lodash",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Julien Reszka",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.10"
+  }
+}
