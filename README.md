@@ -4,6 +4,7 @@ Some npm packages I try some other stuff I find. We'll see.
 
 ## List of experiments
 
+* 2018-08-16 [pdfkit-custom](pdfkit-custom)
 * 2018-08-16 [async-custom](async-custom)
 * 2018-08-15 [moment-custom](moment-custom)
 * 2018-08-13 [request-custom](request-custom)
