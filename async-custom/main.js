@@ -1,14 +1,17 @@
 // main.js
-// example taken from https://javascriptplayground.com/think-async/
 
 var async = require('async');
 
 var square = function (num, doneCallback) {
-  // Call back with no error and the result of num * num
-  return doneCallback(null, num * num)
-};
+  setTimeout(function () {
+    console.log('Squaring', num);
+    // A random amount of time has passed.
+    // Callback with no error and the result of num * num
+    return doneCallback(null, num * num);
+  }, 4000 * Math.random());
+}
 
-// Square each number in the array [1, 2, 3, 4]https://javascriptplayground.com/think-async/
+// Square each number in the array [1, 2, 3, 4]
 async.map([1, 2, 3, 4], square, function (err, results) {
   // Square has been called on each of the numbers
   // so we're now done!
@@ -21,4 +24,4 @@ async.map([1, 2, 3, 4], square, function (err, results) {
     console.log("Finished!")
     console.log(results)
   }
-});
+})
