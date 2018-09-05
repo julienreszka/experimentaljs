@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+<title>Firestore</title>
+<meta charset="UTF-8">
+<meta 
+  name="viewport" 
+  content="
+    width=device-width, 
+    initial-scale=1, 
+    maximum-scale=1, 
+    user-scalable=no, 
+    minimal-ui"> 
+<link 
+  href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' 
+  rel="stylesheet">
+<link 
+  href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+</head>
+<body >
+<div 
+  id="app">
+<v-app>
+<v-content>
+<v-container>
+{{message}}
+<v-form >
+<v-select
+  v-model="newData.type"
+  :items="dataTypes"
+  label="Select a data type"
+></v-select>
+<div
+  v-if="newData.type === 'link'"
+>
+<v-text-field
+  v-model="newData.linkSource"
+  label="Link's source"
+  required
+>
+</v-text-field>
+<v-text-field
+  v-model="newData.linkTarget"
+  label="Link's target"
+  required
+>
+</v-text-field>
+</div>
+<v-btn
+  @click="addData(newData)"
+>
+Add new data
+</v-btn>
+</v-form>
+<pre>
+  {{datas}}
+</pre>
+</v-container>
+</v-content>
+</v-app>
+</div>
+</body>
+
+
+<script 
+  src="https://unpkg.com/vue@2.5.17/dist/vue.min.js"></script>
+<script 
+  src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+<script 
+  src="https://www.gstatic.com/firebasejs/5.4.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+var config = {
+  apiKey: "AIzaSyDgJ4MfA94cE45EYvVLmKgtK4_iZzVc-VQ",
+  authDomain: "firestoretesting-7df35.firebaseapp.com",
+  databaseURL: "https://firestoretesting-7df35.firebaseio.com",
+  projectId: "firestoretesting-7df35",
+  storageBucket: "firestoretesting-7df35.appspot.com",
+  messagingSenderId: "856653141784"
+}
+firebase.initializeApp(config);
+var db = firebase.firestore()
+const firestore = firebase.firestore();
+const settings = {
+  /* your settings... */ 
+  timestampsInSnapshots: true
+};
+firestore.settings(settings);
+
+new Vue({
+  el: '#app',
+  data () {
+    return  {
+      message: "hello world",
+      newData: {},
+      dataTypes: [
+        'node',
+        'link'
+      ],
+      datas: []
+    }
+  },
+  methods: {
+    addData (newData) {
+      console.log(newData)
+      db.collection('datas')
+        .add(newData)
+    }
+  },
+  created() {
+    db.collection('datas')
+      // .where('type', '==', 'link')
+      // .where('linkSource', '==', 'James Bond')
+      .where('type', '==', 'node')
+      .where('nodeLocales', 'array-contains', 'en')
+      .get()
+      .then(querySnapshot => {
+        querySnapshot
+          .forEach(data => {
+            this.datas.push(data.data())
+          })
+      })
+  }
+})
+
+</script>
+</html>

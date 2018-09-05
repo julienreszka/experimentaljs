@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Firestore</title>
+  <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDgJ4MfA94cE45EYvVLmKgtK4_iZzVc-VQ",
+      authDomain: "firestoretesting-7df35.firebaseapp.com",
+      databaseURL: "https://firestoretesting-7df35.firebaseio.com",
+      projectId: "firestoretesting-7df35",
+      storageBucket: "firestoretesting-7df35.appspot.com",
+      messagingSenderId: "856653141784"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script>
+var db = firebase.firestore()
+var eventsRef = db.collection('events')
+var actionsRef = db.collection('actions')
+eventsRef.get().then((querySnapshot) => {
+  querySnapshot.forEach((event) => {
+    const actionRef = actionsRef.doc(event.data().action.id)
+    actionRef.get().then((action) => {
+      if (action.exists) {
+        console.log(action.data().EN)
+      }
+    })
+  })
+})
+  </script>
+</head>
+<body>
+  <h1>Open console</h1>
+</body>
+</html>
